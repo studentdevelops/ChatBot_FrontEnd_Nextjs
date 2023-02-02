@@ -117,6 +117,7 @@ export default function Home() {
             </p>
           </a>
         </div>
+        <h3>We dumb</h3>
       </main>
     </>
   )
