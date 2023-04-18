@@ -47,3 +47,11 @@ body {
   text-align: center;
   border-radius: 20px;
 }
+.dropdown-content {
+  display: none;
+}
+.dropdown:hover .dropdown-content {
+  margin-top: 5px;
+  display: block;
+  position: fixed;
+}
