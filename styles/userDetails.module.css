@@ -1,0 +1,87 @@
+.UserMain {
+  padding: 1.7rem;
+  display: grid;
+  place-items: center;
+}
+
+.UserDetailFormWrapper {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border-radius: 10px;
+  padding: 1.7rem;
+}
+
+.UserTitle {
+  text-align: center;
+  margin: 0.5rem 0 2rem 0;
+  padding: 0.5rem;
+  font-size: 2rem;
+  background: rgba(0, 17, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4.5px);
+  -webkit-backdrop-filter: blur(4.5px);
+  border-radius: 10px;
+}
+
+.UserFormDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.Block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.Options {
+  display: flex;
+  padding-left: 1rem;
+  gap: 20px;
+  text-align: center;
+}
+
+.OptionAlign {
+  display: flex;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.SaveButton {
+  align-self: center;
+  border: 2px dotted black;
+  border-radius: 10px;
+  padding: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  min-width: 200px;
+  background-color: transparent;
+  transition: all 200ms ease-in-out;
+}
+
+.SaveButton:hover {
+  border: 2px solid black;
+  background-color: hsla(0, 0%, 0%, 0.381);
+  color: white;
+}
+
+.inputField {
+  width: 200px;
+  outline: none;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: hsla(0, 0%, 0%, 0.182);
+  color: white;
+  border: none;
+  -webkit-box-shadow: 13px 21px 46px -11px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 13px 21px 46px -11px rgba(0, 0, 0, 0.57);
+  box-shadow: 13px 21px 46px -11px rgba(0, 0, 0, 0.57);
+}
+.inputField::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 0.3; /* Firefox */
+}
