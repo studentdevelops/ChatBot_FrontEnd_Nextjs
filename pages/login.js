@@ -30,12 +30,7 @@ export default function Login() {
     if (password.length < 8) {
       return false;
     }
-    // At least one digit
-    // At least one lowercase letter
-    // At least one uppercase letter
-    // At least one special character
-    // Minimum length of 8 characters
-    //     // Password should have at least one uppercase letter, one lowercase letter and one number
+    // Password should have at least one uppercase letter, one lowercase letter and one number
     const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
     return regex.test(password);
   };
