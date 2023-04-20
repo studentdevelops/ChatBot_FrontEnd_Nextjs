@@ -3,9 +3,11 @@ import classNames from "classnames";
 
 import { motion } from "framer-motion";
 import cookieCutter from 'cookie-cutter';
+import { useRouter } from "next/router";
 
 
-export default function login() {
+export default function Login() {
+  const router = useRouter();
   const switchersFunc = (e) => {
     const switcherElements = document.querySelectorAll(`.${styles.switcher}`);
 
@@ -33,6 +35,7 @@ export default function login() {
       );
       if(result?.success){
         cookieCutter.set("user", JSON.stringify({userid: result.userid, name: result.name}))
+        router.push("/additionaldetails")
       }
     }
   }
@@ -51,6 +54,7 @@ export default function login() {
       );
       if(result?.success){
         cookieCutter.set("user", JSON.stringify({userid: result.userid, name: result.name}))
+        router.push("/additionaldetails")
       }
     }
   }
