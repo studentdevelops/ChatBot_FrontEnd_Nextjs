@@ -20,6 +20,26 @@ export default function Login() {
     e.target.children[0].classList.add(`${styles.underline}`);
   };
 
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
+
+  const validatePassword = (password) => {
+    // Password should be at least 8 characters long
+    if (password.length < 8) {
+      return false;
+    }
+    // At least one digit
+    // At least one lowercase letter
+    // At least one uppercase letter
+    // At least one special character
+    // Minimum length of 8 characters
+    //     // Password should have at least one uppercase letter, one lowercase letter and one number
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+    return regex.test(password);
+  };
+
   const submitLogin = async (e) => {
     const email = document.querySelector("#login-email").value.trim();
     const password = document.querySelector("#login-password").value;
@@ -33,8 +53,8 @@ export default function Login() {
         })
       },
       );
-      if(result?.success){
-        cookieCutter.set("user", JSON.stringify({userid: result.userid, name: result.name}))
+      if (result?.success) {
+        cookieCutter.set("user", JSON.stringify({ userid: result.userid, name: result.name }))
         router.push("/additionaldetails")
       }
     }
@@ -52,8 +72,8 @@ export default function Login() {
         })
       },
       );
-      if(result?.success){
-        cookieCutter.set("user", JSON.stringify({userid: result.userid, name: result.name}))
+      if (result?.success) {
+        cookieCutter.set("user", JSON.stringify({ userid: result.userid, name: result.name }))
         router.push("/additionaldetails")
       }
     }
