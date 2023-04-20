@@ -1,6 +1,10 @@
 import styles from "@/styles/login.module.css";
 import classNames from "classnames";
 
+import { motion } from "framer-motion";
+import cookieCutter from 'cookie-cutter';
+
+
 export default function login() {
   const switchersFunc = (e) => {
     const switcherElements = document.querySelectorAll(`.${styles.switcher}`);
@@ -27,8 +31,10 @@ export default function login() {
         })
       },
       );
+      if(result?.success){
+        cookieCutter.set("user", JSON.stringify({userid: result.userid, name: result.name}))
+      }
     }
-
   }
 
   const submitSignup = async (e) => {
@@ -43,14 +49,25 @@ export default function login() {
         })
       },
       );
+      if(result?.success){
+        cookieCutter.set("user", JSON.stringify({userid: result.userid, name: result.name}))
+      }
     }
   }
-
+  const boxVariants = {
+    initial: { opacity: 0, x: "-10rem", y: "-10rem" },
+    animate: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+      transition: { staggerChildren: 0.05, ease: "easeInOut", duration: 1.5 },
+    },
+  }
   return (
     <div>
       <section className={styles.formsSection}>
         <div className={styles.forms}>
-          <div className={classNames(styles.formWrapper, styles.isActive)}>
+          <motion.div variants={boxVariants} initial="initial" animate="animate" className={classNames(styles.formWrapper, styles.isActive)}>
             <button
               onClick={switchersFunc}
               type="button"
@@ -86,12 +103,16 @@ export default function login() {
                   />
                 </div>
               </fieldset>
-              <button type="submit" className={styles.btnLogin} onClick={submitLogin}>
+              <motion.button whileHover={{
+                scale: 1.1,
+                transition: { duration: 0.01 }
+              }} whileTap={{ scale: 1, transition: { duration: 0.01 } }}
+                type="submit" className={styles.btnLogin} onClick={submitLogin}>
                 Login
-              </button>
+              </motion.button>
             </form>
-          </div>
-          <div className={styles.formWrapper}>
+          </motion.div>
+          <motion.div variants={boxVariants} initial="initial" animate="animate" className={styles.formWrapper}>
             <button
               onClick={switchersFunc}
               type="button"
@@ -128,11 +149,14 @@ export default function login() {
                   />
                 </div>
               </fieldset>
-              <button type="submit" className={styles.btnSignup} onClick={submitSignup}>
+              <motion.button whileHover={{
+                scale: 1.1,
+                transition: { duration: 0.01 }
+              }} whileTap={{ scale: 1, transition: { duration: 0.01 } }} type="submit" className={styles.btnSignup} onClick={submitSignup}>
                 Continue
-              </button>
+              </motion.button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

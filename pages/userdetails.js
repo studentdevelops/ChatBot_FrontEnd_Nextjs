@@ -1,6 +1,25 @@
+import Nav from "@/components/NavBar/Nav";
 import styles from "@/styles/userDetails.module.css"
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from "react";
+import cookieCutter from 'cookie-cutter';
 
-const userdetails = () => {
+
+const Userdetails = () => {
+
+    const router = useRouter();
+
+    const [username, setUser] = useState("")
+    useEffect(() => {
+        const user = cookieCutter.get("user");
+        if(user){
+            setUser(JSON.parse(user).name)
+        }
+    }, [])
+
+
+
     const bmiCalc = (e) => {
         let height = (document.querySelector("input[name='height']").value) / 100;
         let weight = document.querySelector("input[name='weight']").value;
@@ -20,97 +39,155 @@ const userdetails = () => {
             }
             document.querySelector("#bmrDisplay").textContent = bmrVal.toFixed(2) + " calories to be taken daily";
         }
-
     }
-    return (
-        <div className={styles.UserMain}>
-            <div className={styles.UserDetailFormWrapper}>
-                <h3 className={styles.UserTitle}>User details</h3>
-                <form className={styles.UserFormDetails}>
-                    <div className={styles.Block}>
-                        <div className={styles.Question}>
-                            Name:
-                        </div>
-                        <div className={styles.Options}>
-                            <div className={styles.OptionAlign}><input className={styles.inputField} type="text" name="name" placeholder="name" required/></div>
-                        </div>
-                    </div>
-                    <div className={styles.Block}>
-                        <div className={styles.Question}>
-                            Gender
-                        </div>
-                        <div className={styles.Options}>
-                            <div className={styles.OptionAlign}><input type="radio" name="gender" value={"1"} onChange={bmiCalc} required/> Male </div>
-                            <div className={styles.OptionAlign}><input type="radio" name="gender" value={"0"} onChange={bmiCalc} required/> Female </div>
-                        </div>
-                    </div>
-                    <div className={styles.Block}>
-                        <div className={styles.Question}>
-                            Age:
-                        </div>
-                        <div className={styles.Options}>
-                            <div className={styles.OptionAlign}><input type="range" name="age" min={"10"} max={"100"} onChange={(e) => {
-                                document.querySelector("#ageDisplay").textContent = e.target.value;
-                            }} required /> <div id={"ageDisplay"}></div></div>
-                        </div>
-                    </div>
-                    <div className={styles.Block}>
-                        <div className={styles.Question}>
-                            Height:
-                        </div>
-                        <div className={styles.Options}>
-                            <div className={styles.OptionAlign}><input className={styles.inputField} type="number" name="height" placeholder="In cm" onChange={bmiCalc} /></div>
-                        </div>
-                    </div>
-                    <div className={styles.Block}>
-                        <div className={styles.Question}>
-                            Weight:
-                        </div>
-                        <div className={styles.Options}>
-                            <div className={styles.OptionAlign}><input className={styles.inputField} type="number" name="weight" placeholder="In KG" onChange={bmiCalc} /></div>
-                        </div>
-                    </div>
-                    <div className={styles.Block}>
-                        <div className={styles.Question}>
-                            BMI:
-                        </div>
-                        <div className={styles.Options}>
-                            <div className={styles.OptionAlign}><input className={styles.inputField} type="decimal" name="bmi" placeholder="will be calculated" contentEditable="false" disabled/></div>
-                        </div>
-                    </div>
-                    <div className={styles.Block}>
-                        <div className={styles.Question}>
-                            Ever had a surgery?
-                        </div>
-                        <div className={styles.Options}>
-                            <div className={styles.OptionAlign}><input type="radio" name="surgery" value={"1"} required /> Yes</div>
-                            <div className={styles.OptionAlign}><input type="radio" name="surgery" value={"0"} required /> No</div>
-                        </div>
-                    </div>
-                    <div className={styles.Block}>
-                        <div className={styles.Question}>
-                            Any post surgery or hospital complications?
 
-                        </div>
-                        <div className={styles.Options}>
-                            <div className={styles.OptionAlign}><input type="radio" name="complications" value={"1"} required /> Yes</div>
-                            <div className={styles.OptionAlign}><input type="radio" name="complications" value={"0"} required/> No</div>
-                        </div>
-                    </div>
-                    <div className={styles.Block}>
-                        <div className={styles.Question} title="Do you reach the BMR(How many Calories should you intake as per your height, weight, age)">
-                            BMR: <div id="bmrDisplay"></div>
-                        </div>
-                        <div className={styles.Options}>
-                            <div className={styles.OptionAlign}><input type="radio" name="bmr" value={"1"} required/> Yes</div>
-                            <div className={styles.OptionAlign}><input type="radio" name="bmr" value={"0"} required/> No</div>
-                        </div>
-                    </div>
-                    <button className={styles.SaveButton} type="submit">Save</button>
-                </form>
+    const formSubmission = async (e) => {
+        if (process?.browser == true) {
+            e.preventDefault();
+            const name = document.querySelector("input[name='name']").value;
+            const gender = document.querySelector("input[name='gender']").value;
+            const age = document.querySelector("input[name='age']").value;
+            const height = document.querySelector("input[name='height']").value;
+            const weight = document.querySelector("input[name='weight']").value;
+            const bmi = document.querySelector("input[name='bmi']").value;
+            const surgery = document.querySelector("input[name='surgery']").value;
+            const complication = document.querySelector("input[name='complications']").value;
+            const bmr = document.querySelector("input[name='bmr']").value;
+
+            const localSave = { name, gender, age, height, weight, bmi, surgery, complication, bmr }
+            console.log(localStorage)
+            localStorage.setItem("userDetails", JSON.stringify(localSave));
+
+            router.push("/addtionaldetails")
+
+        }
+    }
+
+    const boxVariants = {
+        initial: { opacity: 0, x: "-10rem", y: "-10rem" },
+        animate: {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            transition: { staggerChildren: 1, ease: "easeInOut", duration: 1 },
+        },
+    }
+    const formVariants = {
+        initial: { opacity: 0, x: "-5rem", y: "-5rem" },
+        animate: {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            transition: { staggerChildren: 0.3, ease: "easeInOut", duration: 1 },
+        },
+    }
+    const childVariants = {
+        initial: { opacity: 0, x: "-2rem", y: "-2rem" },
+        animate: {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            transition: { ease: "easeInOut", duration: 0.5 },
+        },
+    }
+
+    return (
+        <>
+            <Nav username={username} />
+            <div className={styles.UserMain}>
+                <motion.div variants={boxVariants} initial="initial" animate="animate" className={styles.UserDetailFormWrapper}>
+                    <h3 className={styles.UserTitle}>User details</h3>
+                    <motion.form variants={formVariants} initial="initial" animate="animate" onSubmit={formSubmission} className={styles.UserFormDetails}>
+                        <motion.div variants={childVariants} className={styles.Block}>
+                            <div className={styles.Question}>
+                                Name:
+                            </div>
+                            <div className={styles.Options}>
+                                <div className={styles.OptionAlign}><input className={styles.inputField} type="text" name="name" placeholder="name" required /></div>
+                            </div>
+                        </motion.div>
+                        <motion.div variants={childVariants} className={styles.Block}>
+                            <div className={styles.Question}>
+                                Gender:
+                            </div>
+                            <div className={styles.Options}>
+                                <div className={styles.OptionAlign}><input type="radio" name="gender" value={"1"} onChange={bmiCalc} required /> Male </div>
+                                <div className={styles.OptionAlign}><input type="radio" name="gender" value={"0"} onChange={bmiCalc} required /> Female </div>
+                            </div>
+                        </motion.div>
+                        <motion.div variants={childVariants} className={styles.Block}>
+                            <div className={styles.Question}>
+                                Age:
+                            </div>
+                            <div className={styles.Options}>
+                                <div className={styles.OptionAlign}><input type="range" name="age" min={"1"} max={"100"} onChange={(e) => {
+                                    document.querySelector("#ageDisplay").textContent = e.target.value;
+                                }} required /> <div id={"ageDisplay"}></div></div>
+                            </div>
+                        </motion.div>
+                        <motion.div variants={childVariants} className={styles.Block}>
+                            <div className={styles.Question}>
+                                Height:
+                            </div>
+                            <div className={styles.Options}>
+                                <div className={styles.OptionAlign}><input className={styles.inputField} type="number" name="height" placeholder="In cm" onChange={bmiCalc} /></div>
+                            </div>
+                        </motion.div>
+                        <motion.div variants={childVariants} className={styles.Block}>
+                            <div className={styles.Question}>
+                                Weight:
+                            </div>
+                            <div className={styles.Options}>
+                                <div className={styles.OptionAlign}><input className={styles.inputField} type="number" name="weight" placeholder="In KG" onChange={bmiCalc} /></div>
+                            </div>
+                        </motion.div>
+                        <motion.div variants={childVariants} className={styles.Block}>
+                            <div className={styles.Question}>
+                                BMI:
+                            </div>
+                            <div className={styles.Options}>
+                                <div className={styles.OptionAlign}><input className={styles.inputField} type="decimal" name="bmi" placeholder="will be calculated" contentEditable="false" disabled /></div>
+                            </div>
+                        </motion.div>
+                        <motion.div variants={childVariants} className={styles.Block}>
+                            <div className={styles.Question}>
+                                Ever had a surgery?
+                            </div>
+                            <div className={styles.Options}>
+                                <div className={styles.OptionAlign}><input type="radio" name="surgery" value={"1"} required /> Yes</div>
+                                <div className={styles.OptionAlign}><input type="radio" name="surgery" value={"0"} required /> No</div>
+                            </div>
+                        </motion.div>
+                        <motion.div variants={childVariants} className={styles.Block}>
+                            <div className={styles.Question}>
+                                Any post surgery or hospital complications?
+
+                            </div>
+                            <div className={styles.Options}>
+                                <div className={styles.OptionAlign}><input type="radio" name="complications" value={"1"} required /> Yes</div>
+                                <div className={styles.OptionAlign}><input type="radio" name="complications" value={"0"} required /> No</div>
+                            </div>
+                        </motion.div>
+                        <motion.div variants={childVariants} className={styles.Block}>
+                            <div className={styles.Question} title="Do you reach the BMR(How many Calories should you intake as per your height, weight, age)">
+                                BMR: <div id="bmrDisplay"></div>
+                            </div>
+                            <div className={styles.Options}>
+                                <div className={styles.OptionAlign}><input type="radio" name="bmr" value={"1"} required /> Yes</div>
+                                <div className={styles.OptionAlign}><input type="radio" name="bmr" value={"0"} required /> No</div>
+                            </div>
+                        </motion.div>
+                        <motion.div variants={childVariants} className={styles.Block}>
+                            <motion.button whileHover={{
+                                scale: 1.1,
+                                transition: { duration: 0.1 }
+                            }} whileTap={{ scale: 1, transition: { duration: 0.1 } }} variants={childVariants} className={styles.SaveButton} >Next</motion.button>
+                        </motion.div>
+                    </motion.form>
+                </motion.div>
             </div>
-        </div>
+        </>
     )
 }
 
-export default userdetails
+export default Userdetails

@@ -3,25 +3,41 @@
   margin: 0;
 }
 
+h1,h2,h3,h4,h5,h6, a {
+  text-decoration: none;
+  color: inherit;
+}
+
 body {
   height: 100vh;
   width: 100vw;
-  background-image: linear-gradient(
-    to bottom,
-    #540579,
-    #501a86,
-    #4a2993,
-    #4235a0,
-    #3540ac,
-    #2b4cb8,
-    #1d58c3,
-    #0064cd,
-    #0074d9,
-    #0085e4,
-    #1695ee,
-    #2ca5f7
+  background: hsla(219, 98%, 19%, 1);
+
+  background: linear-gradient(
+    90deg,
+    hsla(219, 98%, 19%, 1) 0%,
+    hsla(204, 53%, 51%, 1) 41%,
+    hsla(201, 72%, 59%, 1) 53%,
+    hsla(190, 84%, 63%, 1) 100%
   );
-  /* background-repeat: no-repeat; */
+
+  background: -moz-linear-gradient(
+    90deg,
+    hsla(219, 98%, 19%, 1) 0%,
+    hsla(204, 53%, 51%, 1) 41%,
+    hsla(201, 72%, 59%, 1) 53%,
+    hsla(190, 84%, 63%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    90deg,
+    hsla(219, 98%, 19%, 1) 0%,
+    hsla(204, 53%, 51%, 1) 41%,
+    hsla(201, 72%, 59%, 1) 53%,
+    hsla(190, 84%, 63%, 1) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#012260", endColorstr="#3F8FC4", GradientType=1 );
 }
 
 .navBar {
@@ -38,7 +54,7 @@ body {
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: hsla(0, 0%, 100%, 0.2);
+  background-color: hsla(0, 0%, 100%, 0.16);
 }
 
 .navItems {
@@ -47,11 +63,19 @@ body {
   text-align: center;
   border-radius: 20px;
 }
-.dropdown-content {
+.dropdown-content-wrapper {
   display: none;
 }
-.dropdown:hover .dropdown-content {
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.dropdown:hover .dropdown-content-wrapper {
   margin-top: 5px;
   display: block;
   position: fixed;
+  text-align: start;
 }
