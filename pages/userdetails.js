@@ -58,7 +58,6 @@ const Userdetails = () => {
             const localSave = { name, gender, Age, height, weight, bmi, surgery, complication, baseline_digestive }
             console.log(localStorage)
             localStorage.setItem("userDetails", JSON.stringify(localSave));
-
             router.push("/addtionaldetails")
 
         }

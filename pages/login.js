@@ -36,40 +36,38 @@ export default function Login() {
   };
 
   const submitLogin = async (e) => {
+    e.preventDefault();
     const email = document.querySelector("#login-email").value.trim();
     const password = document.querySelector("#login-password").value;
 
-    if (email != null && password != null) {
-      const result = await fetch("", {
+    if (validateEmail(email) && validatePassword(password)) {
+      const result = await fetch("http://127.0.0.1:5000/Get_User", {
         method: "POST",
-        body: JSON.stringify({
-          email: email,
-          password: password
-        })
-      },
-      );
-      if (result?.success) {
-        cookieCutter.set("user", JSON.stringify({ userid: result.userid, name: result.name }))
-        router.push("/additionaldetails")
-      }
+        email: email,
+        password: password
+      });
     }
+    if (result?.success) {
+      cookieCutter.set("user", JSON.stringify({ userid: result.userid, name: result.name }))
+      router.push("/additionaldetails")
+    }
+
   }
 
   const submitSignup = async (e) => {
+    e.preventDefault();
     const email = document.querySelector("#signup-email").value.trim();
     const password = document.querySelector("#signup-password").value;
-    if (email != null && password != null) {
-      const result = await fetch("", {
+    if (validateEmail(email) && validatePassword(password)) {
+      const result = await fetch("http://127.0.0.1:5000/Create_User", {
         method: "POST",
-        body: JSON.stringify({
-          email: email,
-          password: password
-        })
+        email: email,
+        password: password
       },
       );
       if (result?.success) {
         cookieCutter.set("user", JSON.stringify({ userid: result.userid, name: result.name }))
-        router.push("/additionaldetails")
+        router.push("/userdetails")
       }
     }
   }

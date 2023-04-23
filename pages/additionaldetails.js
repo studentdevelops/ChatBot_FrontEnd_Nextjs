@@ -33,9 +33,7 @@ const Addtionaldetails = () => {
             console.log(localSave)
             const result = await fetch("", {
                 method: "POST",
-                body: JSON.stringify(
-                    localSave
-                )
+                body: localSave
             },);
             if (result?.success) {
                 const resultElement = document.querySelector("results");
