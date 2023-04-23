@@ -7,25 +7,26 @@ import { useEffect, useState } from "react";
 import classNames from "classnames";
 import Nav from "@/components/NavBar/Nav";
 import cookieCutter from 'cookie-cutter';
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-
+  const router = useRouter();
   const [username, setUser] = useState("")
   useEffect(() => {
     const user = cookieCutter.get("user");
     if(user){
-        setUser(user.name)
-    }
-
-}, [])
+      if(JSON.parse(user).name!= "")
+      setUser(JSON.parse(user).name)
+    } 
+  }, [])
 
   const [msges, setMsges] = useState([
-    "Hi",
-    "Esse consequat sit esse Lorem exercitation id culpa enim qui tempor consectetur proident. Ea dolor elit nulla reprehenderit. Sit ullamco non tempor eu sit pariatur.",
-    "Alright Thank You",
-    "Welcome",
+    "hey i have been diagnosed with dimentia.",
+    "Dementia is a complex and progressive condition. It is important to consult with a healthcare professional who can provide personalized advice and treatment options. Maintaining a healthy lifestyle, engaging in cognitive activities, and utilizing support services can also be helpful.",
+    "what steps should i be taking?",
+    "You should consider the following steps: \nVisit a specialist and discuss the diagnosis and the stage of dementia \nCreate a support network of family, friends, and caregivers. \nStart cognitive and physical exercises to maintain mental and physical health. \nReview financial and legal documents and consider appointing a trusted family member as a power of attorney. \nConsider joining support groups for individuals and families affected by dementia. \nEnsure a safe and comfortable living environment.\n Monitor medications and potential side effects. \nPlan for the future, including end-of-life care.",
   ]);
   const chat = msges.map((msg, i) => {
     if (i % 2 == 0) {
@@ -48,15 +49,20 @@ export default function Home() {
     const msg = document.querySelector("#message");
     if (msg.value != null && msg.value != "") {
       const response = await fetch("", {
-        method:"POST",
-        body: JSON.stringify({msg: msg.value})
+        method: "POST",
+        body: JSON.stringify({ msg: msg.value })
       })
-      const result  = await JSON.parse(response);
-      if(result?.success){
-        setMsges([...msges, msg.value, result.msg])
+      if (response?.sucess) {
+        const result = await JSON.parse(response);
+        if (result?.success) {
+          setMsges([...msges, msg.value, result.msg])
+        } else {
+          setMsges([...msges, msg.value])
+        }
       } else {
         setMsges([...msges, msg.value])
       }
+
       msg.value = "";
     }
   };

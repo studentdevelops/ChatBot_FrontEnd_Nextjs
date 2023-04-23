@@ -10,7 +10,7 @@ const Nav = ({ username = "%username%" }) => {
 
   const Logout = () => {
     cookieCutter.set("user", JSON.stringify(""), { expires: new Date(0) });
-    router.push('/login');
+    router.push("/login");
   };
 
   return (
@@ -42,31 +42,62 @@ const Nav = ({ username = "%username%" }) => {
             <FaRobot size={36} color="whitesmoke" />
           </Link>
         </motion.li>
-        <motion.li
-          whileHover={{
-            scale: 1.1,
-            transition: { duration: 0.1 },
-          }}
-          whileTap={{
-            scale: 1,
-            transition: { duration: 0.1 },
-          }}
-          className="navItems dropdown"
-        >
-          {username}{" "}
+        <li className="navItems dropdown">
+          <motion.p
+            whileHover={{
+              scale: 1.1,
+              transition: { duration: 0.1 },
+            }}
+            whileTap={{
+              scale: 1,
+              transition: { duration: 0.1 },
+            }}
+          >
+            {username}{" "}
+          </motion.p>
+
           <div className="dropdown-content-wrapper">
             <div className="dropdown-content">
-              <Link href={"/userdetails"}>User Details</Link>
-
               <motion.p
-                whileTap={{ scale: 1, transition: { duration: 0.1 } }}
+                whileHover={{
+                  scale: 1.1,
+                  transition: { duration: 0.1 },
+                }}
+                whileTap={{
+                  scale: 1,
+                  transition: { duration: 0.1 },
+                }}
+              >
+                <Link href={"/userdetails"}>User Details</Link>
+              </motion.p>
+              <motion.p
+                whileHover={{
+                  scale: 1.1,
+                  transition: { duration: 0.1 },
+                }}
+                whileTap={{
+                  scale: 1,
+                  transition: { duration: 0.1 },
+                }}
+              >
+                <Link href={"/additionaldetails"}>Pridict</Link>
+              </motion.p>
+              <motion.p
+                whileHover={{
+                  scale: 1.1,
+                  transition: { duration: 0.1 },
+                }}
+                whileTap={{
+                  scale: 1,
+                  transition: { duration: 0.1 },
+                }}
                 onClick={Logout}
               >
                 Logout
               </motion.p>
             </div>
           </div>
-        </motion.li>
+        </li>
       </ul>
     </motion.div>
   );

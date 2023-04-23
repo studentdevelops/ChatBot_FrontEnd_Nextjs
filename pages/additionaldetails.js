@@ -11,25 +11,25 @@ const Addtionaldetails = () => {
     const [username, setUser] = useState("")
     useEffect(() => {
         const user = cookieCutter.get("user");
-        if(user){
-            setUser(JSON.parse(user).name)
+        if (user) {
+            if (JSON.parse(user).name != "")
+                setUser(JSON.parse(user).name)
         }
-
     }, [])
 
 
     const formSubmission = async (e) => {
         if (process?.browser == true) {
             e.preventDefault();
-            const dementia = document.querySelector("input[name='Dementia']").value;
-            const diabetes = document.querySelector("input[name='Diabetes']").value;
-            const cancer = document.querySelector("input[name='Cancer']").value;
-            const lung = document.querySelector("input[name='Lung']").value;
-            const kidney = document.querySelector("input[name='Kidney']").value;
-            const mental = document.querySelector("input[name='mental']").value;
-            const knee = document.querySelector("input[name='Knee']").value;
+            const baseline_dementia = document.querySelector("input[name='Dementia']").value;
+            const baseline_diabetes = document.querySelector("input[name='Diabetes']").value;
+            const baseline_cancer = document.querySelector("input[name='Cancer']").value;
+            const baseline_pulmonary = document.querySelector("input[name='Lung']").value;
+            const baseline_cvd = document.querySelector("input[name='Kidney']").value;
+            const baseline_psych = document.querySelector("input[name='mental']").value;
+            const baseline_osteoart = document.querySelector("input[name='Knee']").value;
             const userDetails = JSON.parse(localStorage.getItem("userDetails"));
-            const localSave = Object.assign(userDetails, { dementia, diabetes, cancer, lung, kidney, mental, knee })
+            const localSave = Object.assign(userDetails, { baseline_dementia, baseline_diabetes, baseline_cancer, baseline_pulmonary, baseline_cvd, baseline_psych, baseline_osteoart })
             console.log(localSave)
             const result = await fetch("", {
                 method: "POST",
@@ -56,7 +56,7 @@ const Addtionaldetails = () => {
             x: 0,
             y: 0,
             opacity: 1,
-            transition: { staggerChildren: 1, ease: "easeInOut", duration: 1 },
+            transition: { staggerChildren: 0.5, ease: "easeInOut", duration: 1 },
         },
     }
     const formVariants = {
@@ -65,7 +65,7 @@ const Addtionaldetails = () => {
             x: 0,
             y: 0,
             opacity: 1,
-            transition: { staggerChildren: 0.3, ease: "easeInOut", duration: 1 },
+            transition: { staggerChildren: 0.1, ease: "easeInOut", duration: 1 },
         },
     }
     const childVariants = {

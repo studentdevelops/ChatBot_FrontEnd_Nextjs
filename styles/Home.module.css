@@ -68,18 +68,18 @@
   border-radius: 20px;
   max-width: 60%;
   word-wrap: break-word;
+  color: whitesmoke;
 }
 
 .msgSent{
   align-self: flex-end;
   text-align: end;
-  /* background-color: red; */
-  background-color: hsla(194, 100%, 50%, 0.236);
+  background-color: hsla(194, 16%, 26%, 0.301);
 }
 
 .msgReceived{
   align-self: flex-start;
-  background-color: rgba(0, 255, 13, 0.19);
+  background-color: hsla(0, 0%, 21%, 0.223);
 }
 
 /** Breakpoints:

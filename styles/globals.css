@@ -3,7 +3,13 @@
   margin: 0;
 }
 
-h1,h2,h3,h4,h5,h6, a {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
   text-decoration: none;
   color: inherit;
 }
@@ -11,7 +17,7 @@ h1,h2,h3,h4,h5,h6, a {
 body {
   height: 100vh;
   width: 100vw;
-  background: hsla(219, 98%, 19%, 1);
+  /* background: hsla(219, 98%, 19%, 1);
 
   background: linear-gradient(
     90deg,
@@ -35,9 +41,12 @@ body {
     hsla(204, 53%, 51%, 1) 41%,
     hsla(201, 72%, 59%, 1) 53%,
     hsla(190, 84%, 63%, 1) 100%
-  );
+  ); */
 
-  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#012260", endColorstr="#3F8FC4", GradientType=1 );
+  /* filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#012260", endColorstr="#3F8FC4", GradientType=1 ); */
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/bg.jpg");
+  backdrop-filter: blur(8px);
+  background-size: cover;
 }
 
 .navBar {

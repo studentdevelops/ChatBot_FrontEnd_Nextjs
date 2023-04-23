@@ -13,8 +13,9 @@ const Userdetails = () => {
     const [username, setUser] = useState("")
     useEffect(() => {
         const user = cookieCutter.get("user");
-        if(user){
-            setUser(JSON.parse(user).name)
+        if (user) {
+            if (JSON.parse(user).name != "")
+                setUser(JSON.parse(user).name)
         }
     }, [])
 
@@ -46,15 +47,15 @@ const Userdetails = () => {
             e.preventDefault();
             const name = document.querySelector("input[name='name']").value;
             const gender = document.querySelector("input[name='gender']").value;
-            const age = document.querySelector("input[name='age']").value;
+            const Age = document.querySelector("input[name='age']").value;
             const height = document.querySelector("input[name='height']").value;
             const weight = document.querySelector("input[name='weight']").value;
             const bmi = document.querySelector("input[name='bmi']").value;
             const surgery = document.querySelector("input[name='surgery']").value;
             const complication = document.querySelector("input[name='complications']").value;
-            const bmr = document.querySelector("input[name='bmr']").value;
+            const baseline_digestive = document.querySelector("input[name='bmr']").value;
 
-            const localSave = { name, gender, age, height, weight, bmi, surgery, complication, bmr }
+            const localSave = { name, gender, Age, height, weight, bmi, surgery, complication, baseline_digestive }
             console.log(localStorage)
             localStorage.setItem("userDetails", JSON.stringify(localSave));
 
@@ -69,7 +70,7 @@ const Userdetails = () => {
             x: 0,
             y: 0,
             opacity: 1,
-            transition: { staggerChildren: 1, ease: "easeInOut", duration: 1 },
+            transition: { staggerChildren: 0.5, ease: "easeInOut", duration: 1 },
         },
     }
     const formVariants = {
@@ -78,7 +79,7 @@ const Userdetails = () => {
             x: 0,
             y: 0,
             opacity: 1,
-            transition: { staggerChildren: 0.3, ease: "easeInOut", duration: 1 },
+            transition: { staggerChildren: 0.1, ease: "easeInOut", duration: 1 },
         },
     }
     const childVariants = {
