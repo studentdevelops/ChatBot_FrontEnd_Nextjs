@@ -45,7 +45,6 @@ const Addtionaldetails = () => {
             },);
             const response = await result.json();
             if (response?.success) {
-                const resultElement = document.querySelector("#results");
                 if (!(response?.output)) {
                     setResult("Yes you may need a medical assistance immediately or in near future, please consult a physician or surgeon or you may talk to our chatbot below");
                 } else {
