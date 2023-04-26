@@ -52,7 +52,7 @@ export default function Login() {
       });
       const response = await result.json()
       const Details = JSON.parse(response.Details)
-      console.log({ response: response, Details })
+      // console.log({ response: response, Details })
       if (response?.success) {
         cookieCutter.set("user", JSON.stringify({ UserId: response.success, name: Details.name }))
         button.textContent = "Login"

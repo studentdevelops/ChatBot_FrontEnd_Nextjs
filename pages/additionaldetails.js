@@ -6,7 +6,11 @@ import { useEffect, useState } from "react";
 import { motion } from 'framer-motion';
 import cookieCutter from 'cookie-cutter';
 
+import { FaRobot } from "react-icons/fa";
+
 const Addtionaldetails = () => {
+
+    const [result, setResult] = useState("");
 
     const [username, setUser] = useState("")
     useEffect(() => {
@@ -31,9 +35,9 @@ const Addtionaldetails = () => {
             const baseline_digestive = document.querySelector("input[name='Digestive']:checked").value;
             const userDetails = JSON.parse(localStorage.getItem("userDetails"));
             const UserId = JSON.parse(cookieCutter.get("user")).UserId;
-            console.log(UserId)
+            // console.log(UserId)
             const localSave = Object.assign(userDetails, { baseline_dementia, baseline_diabetes, baseline_cancer, baseline_pulmonary, baseline_cvd, baseline_psych, baseline_osteoart, baseline_digestive, UserId })
-            console.log(localSave)
+            // console.log(localSave)
 
             const result = await fetch("/api/postdata", {
                 method: "POST",
@@ -43,9 +47,9 @@ const Addtionaldetails = () => {
             if (response?.success) {
                 const resultElement = document.querySelector("#results");
                 if (!(response?.output)) {
-                    resultElement.innerHTML = "Yes you may need a medical assistance immediately or in near future, please consult a physician or surgeon or you may talk to our chatbot " + <Link href={"/"}>click here</Link>;
+                    setResult("Yes you may need a medical assistance immediately or in near future, please consult a physician or surgeon or you may talk to our chatbot below");
                 } else {
-                    resultElement.innerHTML = "No you may not need a medical assistance in near future, but still consult a physician or surgeon atleast once a month or you may talk to our chatbot " + <Link href={"/"}>click here</Link>;
+                    setResult("No you may not need a medical assistance in near future, but still consult a physician or surgeon atleast once a month or you may talk to our chatbot below");
                 }
             } else {
                 alert("try again later")
@@ -183,7 +187,9 @@ const Addtionaldetails = () => {
                                 transition: { duration: 0.1 }
                             }} whileTap={{ scale: 1, transition: { duration: 0.1 } }} className={styles.SaveButton} type="submit">Predict</motion.button>
                         </motion.div>
-                        <p id="results"></p>
+
+                        <p className={styles.prediction} id="results"> {result && result}</p>
+                        {result && <Link className={styles.chatbot} href={"/"}><FaRobot size={36} color="#fffffaa"/></Link>}
                     </motion.form>
                 </motion.div>
 

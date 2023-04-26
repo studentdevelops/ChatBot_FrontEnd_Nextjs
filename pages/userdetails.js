@@ -55,8 +55,8 @@ const Userdetails = () => {
             const complications = document.querySelector("input[name='complications']:checked").value;
             const bmr = document.querySelector("input[name='bmr']:checked").value;
             const localSave = { name, gender, Age, height, weight, bmi,bmr, surgery, complications }
-            console.log(localSave)
-            console.log(localStorage)
+            // console.log(localSave)
+            // console.log(localStorage)
             localStorage.setItem("userDetails", JSON.stringify(localSave));
             router.push("/additionaldetails")
             

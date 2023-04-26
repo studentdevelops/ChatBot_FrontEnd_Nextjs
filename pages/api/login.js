@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 
         })
         const response = await result.json()
-        console.log({result, response})
+        // console.log({result, response})
         res.status(200).json(response)
     }
     // res.status(200).json({ name: 'John Doe' })

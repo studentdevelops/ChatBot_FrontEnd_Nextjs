@@ -11,6 +11,10 @@
   -webkit-backdrop-filter: blur(2.5px);
   border-radius: 10px;
   padding: 1.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .AdditionalDetailsTitle {
@@ -85,4 +89,21 @@
 .inputField::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: white;
   opacity: 0.3; /* Firefox */
+}
+
+.prediction {
+  max-width: 350px;
+}
+
+.chatbot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  text-align: center;
+  font-size: 1.05rem;
+  margin: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-decoration: underline;
 }

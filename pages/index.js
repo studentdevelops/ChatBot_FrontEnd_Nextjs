@@ -46,17 +46,17 @@ export default function Home() {
 
   const onSend = async (e) => {
     const msg = document.querySelector("#message");
-    if (msg.value != null && msg.value != "") {
-      const result = await fetch("", {
+    if (msg.value != null) {
+      const UserId = JSON.parse(cookieCutter.get("user")).UserId
+      const result = await fetch("/api/chatapi", {
         method: "POST",
-        body: JSON.stringify({ msg: msg.value })
+        body: JSON.stringify({ Question: msg.value + "* for medical purpose only" + ".", UserId: UserId })
       })
-
-      if (response) {
-        const response = result.json();
-        console.log(response);
-        if (result?.success) {
-          setMsges([...msges, msg.value, result.msg])
+      
+      if (result) {
+        const response = await result.json();
+        if (response?.success) {
+          setMsges([...msges, msg.value, response.message])
         } else {
           setMsges([...msges, msg.value])
         }

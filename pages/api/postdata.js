@@ -2,7 +2,7 @@
 
 export default async function handler(req, res) {
     if (req.method == "POST") {
-        console.log(JSON.parse(req.body))
+        // console.log(JSON.parse(req.body))
         const reqBody = JSON.parse(req.body);
         const UserId = reqBody.UserId;
         const name = reqBody.name;
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
             })
         })
         const response = await result.json()
-        console.log({ result, response })
+        // console.log({ result, response })
         res.status(200).json(response)
     }
     // res.status(200).json({ name: 'John Doe' })
