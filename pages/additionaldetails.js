@@ -21,26 +21,31 @@ const Addtionaldetails = () => {
     const formSubmission = async (e) => {
         if (process?.browser == true) {
             e.preventDefault();
-            const baseline_dementia = document.querySelector("input[name='Dementia']").value;
-            const baseline_diabetes = document.querySelector("input[name='Diabetes']").value;
-            const baseline_cancer = document.querySelector("input[name='Cancer']").value;
-            const baseline_pulmonary = document.querySelector("input[name='Lung']").value;
-            const baseline_cvd = document.querySelector("input[name='Kidney']").value;
-            const baseline_psych = document.querySelector("input[name='mental']").value;
-            const baseline_osteoart = document.querySelector("input[name='Knee']").value;
+            const baseline_dementia = document.querySelector("input[name='Dementia']:checked").value;
+            const baseline_diabetes = document.querySelector("input[name='Diabetes']:checked").value;
+            const baseline_cancer = document.querySelector("input[name='Cancer']:checked").value;
+            const baseline_pulmonary = document.querySelector("input[name='Lung']:checked").value;
+            const baseline_cvd = document.querySelector("input[name='Kidney']:checked").value;
+            const baseline_psych = document.querySelector("input[name='mental']:checked").value;
+            const baseline_osteoart = document.querySelector("input[name='Knee']:checked").value;
+            const baseline_digestive = document.querySelector("input[name='Digestive']:checked").value;
             const userDetails = JSON.parse(localStorage.getItem("userDetails"));
-            const localSave = Object.assign(userDetails, { baseline_dementia, baseline_diabetes, baseline_cancer, baseline_pulmonary, baseline_cvd, baseline_psych, baseline_osteoart })
+            const UserId = JSON.parse(cookieCutter.get("user")).UserId;
+            console.log(UserId)
+            const localSave = Object.assign(userDetails, { baseline_dementia, baseline_diabetes, baseline_cancer, baseline_pulmonary, baseline_cvd, baseline_psych, baseline_osteoart, baseline_digestive, UserId })
             console.log(localSave)
-            const result = await fetch("", {
+
+            const result = await fetch("/api/postdata", {
                 method: "POST",
-                body: localSave
+                body: JSON.stringify(localSave)
             },);
-            if (result?.success) {
-                const resultElement = document.querySelector("results");
-                if (result?.output) {
+            const response = await result.json();
+            if (response?.success) {
+                const resultElement = document.querySelector("#results");
+                if (!(response?.output)) {
                     resultElement.innerHTML = "Yes you may need a medical assistance immediately or in near future, please consult a physician or surgeon or you may talk to our chatbot " + <Link href={"/"}>click here</Link>;
                 } else {
-                    resultElement.innerHTML = "Yes you may not need a medical assistance in near future, but still consult a physician or surgeon atleast once a month or you may talk to our chatbot " + <Link href={"/"}>click here</Link>;
+                    resultElement.innerHTML = "No you may not need a medical assistance in near future, but still consult a physician or surgeon atleast once a month or you may talk to our chatbot " + <Link href={"/"}>click here</Link>;
                 }
             } else {
                 alert("try again later")
@@ -100,6 +105,15 @@ const Addtionaldetails = () => {
                             <div className={styles.Options}>
                                 <div className={styles.OptionAlign}><input type="radio" name="Diabetes" value={"1"} required /> Yes</div>
                                 <div className={styles.OptionAlign}><input type="radio" name="Diabetes" value={"0"} required /> No</div>
+                            </div>
+                        </motion.div>
+                        <motion.div variants={childVariants} className={styles.Block}>
+                            <div className={styles.Question}>
+                                Does the patient have Digestive Disorder ?
+                            </div>
+                            <div className={styles.Options}>
+                                <div className={styles.OptionAlign}><input type="radio" name="Digestive" value={"1"} required /> Yes</div>
+                                <div className={styles.OptionAlign}><input type="radio" name="Digestive" value={"0"} required /> No</div>
                             </div>
                         </motion.div>
                         <motion.div variants={childVariants} className={styles.Block}>

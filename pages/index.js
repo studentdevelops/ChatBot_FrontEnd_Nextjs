@@ -16,10 +16,10 @@ export default function Home() {
   const [username, setUser] = useState("")
   useEffect(() => {
     const user = cookieCutter.get("user");
-    if(user){
-      if(JSON.parse(user).name!= "")
-      setUser(JSON.parse(user).name)
-    } 
+    if (user) {
+      if (JSON.parse(user).name != "")
+        setUser(JSON.parse(user).name)
+    }
   }, [])
 
   const [msges, setMsges] = useState([
@@ -32,7 +32,6 @@ export default function Home() {
     if (i % 2 == 0) {
       return (
         <div key={i + 1} className={classNames(styles.msg, styles.msgSent)}>
-          {" "}
           {msg}
         </div>
       );
@@ -48,12 +47,14 @@ export default function Home() {
   const onSend = async (e) => {
     const msg = document.querySelector("#message");
     if (msg.value != null && msg.value != "") {
-      const response = await fetch("", {
+      const result = await fetch("", {
         method: "POST",
         body: JSON.stringify({ msg: msg.value })
       })
-      if (response?.sucess) {
-        const result = await JSON.parse(response);
+
+      if (response) {
+        const response = result.json();
+        console.log(response);
         if (result?.success) {
           setMsges([...msges, msg.value, result.msg])
         } else {
@@ -62,7 +63,6 @@ export default function Home() {
       } else {
         setMsges([...msges, msg.value])
       }
-
       msg.value = "";
     }
   };

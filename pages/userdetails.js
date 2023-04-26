@@ -51,15 +51,15 @@ const Userdetails = () => {
             const height = document.querySelector("input[name='height']").value;
             const weight = document.querySelector("input[name='weight']").value;
             const bmi = document.querySelector("input[name='bmi']").value;
-            const surgery = document.querySelector("input[name='surgery']").value;
-            const complication = document.querySelector("input[name='complications']").value;
-            const baseline_digestive = document.querySelector("input[name='bmr']").value;
-
-            const localSave = { name, gender, Age, height, weight, bmi, surgery, complication, baseline_digestive }
+            const surgery = document.querySelector("input[name='surgery']:checked").value;
+            const complications = document.querySelector("input[name='complications']:checked").value;
+            const bmr = document.querySelector("input[name='bmr']:checked").value;
+            const localSave = { name, gender, Age, height, weight, bmi,bmr, surgery, complications }
+            console.log(localSave)
             console.log(localStorage)
             localStorage.setItem("userDetails", JSON.stringify(localSave));
-            router.push("/addtionaldetails")
-
+            router.push("/additionaldetails")
+            
         }
     }
 

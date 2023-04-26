@@ -86,5 +86,6 @@ body {
   margin-top: 5px;
   display: block;
   position: fixed;
+  z-index: 1;
   text-align: start;
 }

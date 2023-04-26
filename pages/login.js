@@ -37,36 +37,48 @@ export default function Login() {
 
   const submitLogin = async (e) => {
     e.preventDefault();
+    const button = document.querySelectorAll("button")[1];
     const email = document.querySelector("#login-email").value.trim();
     const password = document.querySelector("#login-password").value;
 
-    if (validateEmail(email) && validatePassword(password)) {
-      const result = await fetch("http://127.0.0.1:5000/Get_User", {
+    if (validateEmail(email)) {
+      button.textContent = "Loading.."
+      const result = await fetch("/api/login", {
         method: "POST",
-        email: email,
-        password: password
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
       });
+      const response = await result.json()
+      const Details = JSON.parse(response.Details)
+      console.log({ response: response, Details })
+      if (response?.success) {
+        cookieCutter.set("user", JSON.stringify({ UserId: response.success, name: Details.name }))
+        button.textContent = "Login"
+        router.push("/additionaldetails")
+      }
     }
-    if (result?.success) {
-      cookieCutter.set("user", JSON.stringify({ userid: result.userid, name: result.name }))
-      router.push("/additionaldetails")
-    }
-
   }
 
   const submitSignup = async (e) => {
     e.preventDefault();
+    const button = document.querySelectorAll("button")[3];
     const email = document.querySelector("#signup-email").value.trim();
     const password = document.querySelector("#signup-password").value;
-    if (validateEmail(email) && validatePassword(password)) {
-      const result = await fetch("http://127.0.0.1:5000/Create_User", {
+    if (validateEmail(email)) {
+      button.textContent = "Loading"
+      const result = await fetch("/api/sigin", {
         method: "POST",
-        email: email,
-        password: password
-      },
-      );
-      if (result?.success) {
-        cookieCutter.set("user", JSON.stringify({ userid: result.userid, name: result.name }))
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      });
+      const response = await result.json()
+      if (response?.success) {
+        cookieCutter.set("user", JSON.stringify({ UserId: response.success, name: email }))
+        button.textContent = "Continue"
         router.push("/userdetails")
       }
     }
