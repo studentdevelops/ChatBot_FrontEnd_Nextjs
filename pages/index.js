@@ -22,12 +22,7 @@ export default function Home() {
     }
   }, [])
 
-  const [msges, setMsges] = useState([
-    "hey i have been diagnosed with dimentia.",
-    "Dementia is a complex and progressive condition. It is important to consult with a healthcare professional who can provide personalized advice and treatment options. Maintaining a healthy lifestyle, engaging in cognitive activities, and utilizing support services can also be helpful.",
-    "what steps should i be taking?",
-    "You should consider the following steps: \nVisit a specialist and discuss the diagnosis and the stage of dementia \nCreate a support network of family, friends, and caregivers. \nStart cognitive and physical exercises to maintain mental and physical health. \nReview financial and legal documents and consider appointing a trusted family member as a power of attorney. \nConsider joining support groups for individuals and families affected by dementia. \nEnsure a safe and comfortable living environment.\n Monitor medications and potential side effects. \nPlan for the future, including end-of-life care.",
-  ]);
+  const [msges, setMsges] = useState([]);
   const chat = msges.map((msg, i) => {
     if (i % 2 == 0) {
       return (
@@ -50,7 +45,7 @@ export default function Home() {
       const UserId = JSON.parse(cookieCutter.get("user")).UserId
       const result = await fetch("/api/chatapi", {
         method: "POST",
-        body: JSON.stringify({ Question: msg.value + "* for medical purpose only" + ".", UserId: UserId })
+        body: JSON.stringify({ Question: msg.value + "*note this(and do not mention it)keep your answer limited to general greeting and assistance advices only" + ".", UserId: UserId })
       })
       
       if (result) {
