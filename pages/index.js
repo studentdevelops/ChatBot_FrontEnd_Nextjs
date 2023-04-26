@@ -83,7 +83,7 @@ export default function Home() {
     <>
       <Head>
         {/* TODO: Add a Description, Title, page icon */}
-        <title>Title</title>
+        <title>MedAI | Come have a chat</title>
         <meta name="description" content="Description" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

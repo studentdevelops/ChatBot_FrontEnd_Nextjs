@@ -2,6 +2,7 @@ import Nav from "@/components/NavBar/Nav";
 import styles from "@/styles/addtionalDetails.module.css"
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 import { motion } from 'framer-motion';
 import cookieCutter from 'cookie-cutter';
@@ -87,6 +88,13 @@ const Addtionaldetails = () => {
 
     return (
         <>
+            <Head>
+                {/* TODO: Add a Description, Title, page icon */}
+                <title>MedAI | Pridict</title>
+                <meta name="description" content="Description" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <Nav username={username} />
             <div className={styles.AdditionalDetailsMain}>
                 <motion.div variants={boxVariants} initial="initial" animate="animate" className={styles.AdditonalDetailFormWrapper}>
@@ -188,7 +196,7 @@ const Addtionaldetails = () => {
                         </motion.div>
 
                         <p className={styles.prediction} id="results"> {result && result}</p>
-                        {result && <Link className={styles.chatbot} href={"/"}><FaRobot size={36} color="#fffffaa"/></Link>}
+                        {result && <Link className={styles.chatbot} href={"/"}><FaRobot size={36} color="#fffffaa" /></Link>}
                     </motion.form>
                 </motion.div>
 

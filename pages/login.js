@@ -1,5 +1,6 @@
 import styles from "@/styles/login.module.css";
 import classNames from "classnames";
+import Head from "next/head";
 
 import { motion } from "framer-motion";
 import cookieCutter from 'cookie-cutter';
@@ -94,6 +95,13 @@ export default function Login() {
   }
   return (
     <div>
+       <Head>
+        {/* TODO: Add a Description, Title, page icon */}
+        <title>MedAI | Login/Signup</title>
+        <meta name="description" content="Description" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <section className={styles.formsSection}>
         <div className={styles.forms}>
           <motion.div variants={boxVariants} initial="initial" animate="animate" className={classNames(styles.formWrapper, styles.isActive)}>

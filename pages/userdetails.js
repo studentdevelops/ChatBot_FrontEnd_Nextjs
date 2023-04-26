@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from "react";
 import cookieCutter from 'cookie-cutter';
+import Head from "next/head";
 
 
 const Userdetails = () => {
@@ -54,12 +55,12 @@ const Userdetails = () => {
             const surgery = document.querySelector("input[name='surgery']:checked").value;
             const complications = document.querySelector("input[name='complications']:checked").value;
             const bmr = document.querySelector("input[name='bmr']:checked").value;
-            const localSave = { name, gender, Age, height, weight, bmi,bmr, surgery, complications }
+            const localSave = { name, gender, Age, height, weight, bmi, bmr, surgery, complications }
             // console.log(localSave)
             // console.log(localStorage)
             localStorage.setItem("userDetails", JSON.stringify(localSave));
             router.push("/additionaldetails")
-            
+
         }
     }
 
@@ -93,6 +94,13 @@ const Userdetails = () => {
 
     return (
         <>
+            <Head>
+                {/* TODO: Add a Description, Title, page icon */}
+                <title>MedAI | Fill in User Details</title>
+                <meta name="description" content="Description" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <Nav username={username} />
             <div className={styles.UserMain}>
                 <motion.div variants={boxVariants} initial="initial" animate="animate" className={styles.UserDetailFormWrapper}>
